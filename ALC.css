@@ -79,7 +79,6 @@ button, a, .choice-row, .sheet-action, .retry-btn, .share-icon-btn, .nav-btn, .n
 
 .right-header {
   flex-shrink: 0; padding: 0 1.5rem;
-  /* FIX: เพิ่ม safe-area สำหรับ notch */
   padding-top: env(safe-area-inset-top, 0px);
   height: calc(56px + env(safe-area-inset-top, 0px));
   display: flex; align-items: center; justify-content: space-between;

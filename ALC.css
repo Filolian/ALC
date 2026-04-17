@@ -18,7 +18,6 @@ html, body {
   height: 100%; width: 100%;
   font-family: 'Sarabun', sans-serif;
   background: url('bunny.jpg') center/cover no-repeat fixed;
-  overflow: hidden;
   cursor: url('beer.png') 12 12, auto;
 }
 
@@ -69,11 +68,21 @@ button, a, .choice-row, .sheet-action, .retry-btn, .share-icon-btn, .nav-btn, .n
   transform: scale(1.15);
 }
 
-.quiz-wrap { display: flex; flex-direction: column; width: 100vw; height: 100vh; overflow: hidden; }
+.quiz-wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh; 
+  height: 100dvh;           
+  overflow: hidden;
+}
 
 .right-header {
   flex-shrink: 0; padding: 0 1.5rem;
-  height: 56px; display: flex; align-items: center; justify-content: space-between;
+  /* FIX: เพิ่ม safe-area สำหรับ notch */
+  padding-top: env(safe-area-inset-top, 0px);
+  height: calc(56px + env(safe-area-inset-top, 0px));
+  display: flex; align-items: center; justify-content: space-between;
   background: url('bg.jpg') center/cover no-repeat;
   background-attachment: fixed;
   border-bottom: 1px solid var(--border); z-index: 10; position: relative;
@@ -185,7 +194,10 @@ button, a, .choice-row, .sheet-action, .retry-btn, .share-icon-btn, .nav-btn, .n
 }
 
 .card-stage {
-  flex: 1; position: relative; overflow: hidden;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
 }
 
 .cards-track {
@@ -194,6 +206,8 @@ button, a, .choice-row, .sheet-action, .retry-btn, .share-icon-btn, .nav-btn, .n
 
 .q-card {
   width: min(480px, calc(100vw - 40px));
+  max-height: calc(100% - 20px);
+  overflow-y: auto;
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 8px 40px rgba(139,63,207,0.18), 0 2px 8px rgba(139,63,207,0.08);
@@ -302,6 +316,7 @@ button, a, .choice-row, .sheet-action, .retry-btn, .share-icon-btn, .nav-btn, .n
   border-top: 1px solid var(--border);
   z-index: 10; position: relative;
   display: flex; flex-direction: column; gap: 0;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 .right-footer::before {
   content: ''; position: absolute; inset: 0;
@@ -364,9 +379,13 @@ button, a, .choice-row, .sheet-action, .retry-btn, .share-icon-btn, .nav-btn, .n
 .next-btn:active { transform: scale(0.98); }
 
 .result-page {
-  display: none; width: 100vw; height: 100vh;
+  display: none; width: 100vw;
+  min-height: 100vh;
+  min-height: 100dvh;
   flex-direction: column; align-items: center; justify-content: center;
-  padding: 2rem; gap: 1.5rem; overflow-y: auto;
+  padding: 2rem;
+  padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+  gap: 1.5rem; overflow-y: auto;
   background: url('bg.jpg') center/cover no-repeat fixed;
   position: relative;
 }
@@ -464,7 +483,8 @@ button, a, .choice-row, .sheet-action, .retry-btn, .share-icon-btn, .nav-btn, .n
   position: absolute; bottom: 0; left: 0; right: 0;
   background: rgba(255,255,255,0.97);
   border-radius: 24px 24px 0 0;
-  padding: 12px 24px 36px;
+  padding: 12px 24px;
+  padding-bottom: calc(36px + env(safe-area-inset-bottom, 0px));
   transform: translateY(100%);
   transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
   backdrop-filter: blur(20px);
@@ -544,3 +564,29 @@ button, a, .choice-row, .sheet-action, .retry-btn, .share-icon-btn, .nav-btn, .n
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 .save-loading-text { color: #fff; font-size: 14px; font-weight: 600; font-family: 'Sarabun', sans-serif; }
+
+@media (max-width: 390px) {
+  .right-header { padding: 0 1rem; }
+  .header-brand { font-size: 11px; }
+  .discord-link { min-width: 120px; font-size: 10px; }
+
+  .q-text { font-size: 14px; }
+  .choice-text { font-size: 12px; }
+  .choice-dot { width: 24px; height: 24px; }
+
+  .nav-row { padding: 8px 1rem; gap: 8px; }
+  .nav-btn { padding: 8px 12px; font-size: 13px; }
+  .next-btn { font-size: 14px; padding: 10px; }
+
+  .result-card { padding: 1.25rem; }
+  .result-title { font-size: 18px; }
+}
+
+@media (max-height: 667px) {
+  .q-header-area { padding: 14px 20px 12px; }
+  .q-text { font-size: 14px; }
+  .choices-area { gap: 5px; padding: 4px 14px 12px; }
+  .choice-row { padding: 7px 10px; }
+  .footer-comment { min-height: 32px; }
+  .nav-row { padding: 6px 1.5rem; }
+}

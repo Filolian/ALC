@@ -451,20 +451,25 @@ button, a, .choice-row, .sheet-action, .retry-btn, .share-icon-btn, .nav-btn, .n
 .retry-btn:hover { background: var(--purple-pale); transform: translateY(-1px); }
 
 .share-icon-btn {
-  width: 110px; height: 44px;
   border-radius: 12px;
   border: 1.5px solid var(--border);
   background: rgba(255,255,255,0.85);
   cursor: url('beer.png') 12 12, pointer;
-  display: flex; align-items: center; justify-content: center;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 16px;
   transition: all 0.15s;
   overflow: hidden;
-  padding: 0;
   flex-shrink: 0;
 }
 .share-icon-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(139,63,207,0.2); border-color: var(--purple-light); }
 .share-icon-btn img {
-  width: 100%; height: 100%; object-fit: contain; border-radius: 12px;
+  width: 24px;
+  height: auto;
+  object-fit: contain;
 }
 
 .share-overlay {

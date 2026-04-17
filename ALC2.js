@@ -372,7 +372,7 @@ function handleOverlayClick(e) {
 function getShareText() {
   if (!currentResult) return "ข้าเพิ่งทำ ALC. Rating Levels Test! เสร็จ";
   const score = computeDrunkScore();
-  return `ข้าคือ ${currentResult.title} (ค่าความเมา: ${score >= 0 ? "+" : ""}${score}) ในแบบทดสอบ ALC. Rating Levels Test! ไม่เห็นจะเมาเลยย`;
+  return `(ค่าความเมาของข้าคือ : ${score >= 0 ? "+" : ""}${score}) ในแบบทดสอบ ALC. Rating Levels Test! ไม่เห็นจะเมาเลยย`;
 }
 
 async function saveResultImage() {
